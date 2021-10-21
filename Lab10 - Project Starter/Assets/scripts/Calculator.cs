@@ -13,7 +13,8 @@ public class Calculator : MonoBehaviour {
 	private string _op;
 
 	//Initialization
-	private void Start(){
+	private void Start()
+	{
 		ResetAll ();
 	}
 
@@ -26,7 +27,8 @@ public class Calculator : MonoBehaviour {
 	}
 
 	//Handle values coming from button clicks
-	public void SetInputValue(string s){
+	public void SetInputValue(string s)
+	{
 		//Clear fields if _input contains letters
 		if (_input.text.ToString ().Any (x => char.IsLetter (x))) {
 			ResetAll();
@@ -38,7 +40,9 @@ public class Calculator : MonoBehaviour {
 				case "-":
 				case "/":
 				case "*":
-				case "=":
+			    case "^":
+			    case "√":
+			    case "=":
 				Calculate(s);
 				break;
 			case "ce":
@@ -57,9 +61,11 @@ public class Calculator : MonoBehaviour {
 	} 
 
 	//Prepare values before the calculation
-	private void Calculate(string s){
+	private void Calculate(string s)
+	{
 		//If result field is empty
-		if (_result.text == "" && s != "=") {
+		if (_result.text == "" && s != "=") 
+		{
 			_x = Convert.ToSingle(_input.text);
 			_op = s;
 			_result.text = _input.text + " " + s;
@@ -68,7 +74,8 @@ public class Calculator : MonoBehaviour {
 		}
 
 		//Handles division by 0
-		if(_op == "/" && _input.text == "0"){
+		if(_op == "/" && _input.text == "0")
+		{
 			ResetAll();
 			_input.text = "Cannot divide by zero";
 			return;
@@ -77,10 +84,14 @@ public class Calculator : MonoBehaviour {
 		//Calculates float result
 		_y = Convert.ToSingle(_input.text);
 
-		if(s == "="){
+		if(s == "=")
+		{
 			ClearField();
 			_input.text = CalculatePair(_x, _y, _op).ToString();
-		} else {
+		} 
+		
+		else 
+		{
 			_x = Convert.ToSingle(CalculatePair(_x, _y, _op));
 			_result.text = _x.ToString() + " " + s;
 			_op = s;
@@ -89,10 +100,12 @@ public class Calculator : MonoBehaviour {
 	}
 
 	//Return the result of an operation between 2 floats
-	public static float CalculatePair(float x, float y, string op) {
+	public static float CalculatePair(float x, float y, string op) 
+	{
 		float result = 0.0f;
 
-		switch (op) {
+		switch (op) 
+		{
 			case "+":
 				result = x + y;
 				break;
@@ -105,43 +118,62 @@ public class Calculator : MonoBehaviour {
 			case "/":
 				result = x / y;
 				break;
+			case "^":
+				result = Mathf.Pow(x, y);
+				break;
+			case "√":
+				result = Mathf.Sqrt(x);
+				break;
 		}
 
 		return result;
 	}
 
 	//Add character input to input text string
-	private void AddCharacter(string s){
+	private void AddCharacter(string s)
+	{
 		//Add only one decimal point
-		if(s == "."){
-			if(!_input.text.ToString().Contains(".")){
+		if(s == ".")
+		{
+			if(!_input.text.ToString().Contains("."))
+			{
 				_input.text += s;
 			}
 		//Remove 0 in front of number
-		}else if(_input.text == "0"){
+		}
+		
+		else if(_input.text == "0")
+		{
 			_input.text = s;
 		//Concatenate the input string
-		}else{
+		}
+		
+		else
+		{
 			_input.text += s;
 		}
 	}
 
 	//Delete last character of the input string when CE is pressed
-	private void DeleteLastCharacter(){
+	private void DeleteLastCharacter()
+	{
 		_input.text = _input.text.ToString().Remove(_input.text.Length - 1);
 
-		if(_input.text == ""){
+		if(_input.text == "")
+		{
 			_input.text = "0";
 		}
 	}
 
 	//Reset input field
-	private void ClearLastInput(){
+	private void ClearLastInput()
+	{
 		_input.text = "0";
 	}
 
 	//Clear all fields when C is pressed
-	private void ClearField(){
+	private void ClearField()
+	{
 		_result.text = "";
 		_input.text = "0";
 	}

@@ -54,14 +54,14 @@ namespace Tests
         [Test]
         public void TestPowerOperation()
         {
-            result = Mathf.Pow(5, 2);
-            Assert.AreEqual(result, 25);
+            result = Calculator.CalculatePair(5, 3, "^");
+            Assert.AreEqual(result, 125);
         }
 
         [Test]
         public void TestSquareRoot()
         {
-            result = Mathf.Sqrt(289);
+            result = Calculator.CalculatePair(289, 0, "√");
             Assert.AreEqual(result, 17);
         }
     }
