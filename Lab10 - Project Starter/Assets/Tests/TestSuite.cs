@@ -59,9 +59,9 @@ namespace Tests
         }
 
         [Test]
-        public void TestSquareRoot()
+        public void TestRootOperation()
         {
-            result = Calculator.CalculatePair(289, 0, "√");
+            result = Calculator.CalculatePair(289, 2, "√");
             Assert.AreEqual(result, 17);
         }
     }

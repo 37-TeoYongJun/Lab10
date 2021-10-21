@@ -122,7 +122,7 @@ public class Calculator : MonoBehaviour {
 				result = Mathf.Pow(x, y);
 				break;
 			case "√":
-				result = Mathf.Sqrt(x);
+				result = Mathf.Pow(x, 1/y);
 				break;
 		}
 
