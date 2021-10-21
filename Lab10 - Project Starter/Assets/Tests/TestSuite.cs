@@ -19,10 +19,8 @@ namespace Tests
             Assert.AreEqual(result, 7);
         }
 
-        // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-        // `yield return null;` to skip a frame.
         [UnityTest]
-        public IEnumerator TestSuiteWithEnumeratorPasses()
+        public IEnumerator TestUnityAddition()
         {
             // Use the Assert class to test conditions.
             // Use yield to skip a frame.
@@ -30,6 +28,41 @@ namespace Tests
 
             result = Calculator.CalculatePair(5, 2, "+");
             Assert.AreEqual(result, 7);
+        }
+
+        [Test]
+        public void TestSubtraction()
+        {
+            result = Calculator.CalculatePair(10, 7, "-");
+            Assert.AreEqual(result, 3);
+        }
+
+        [Test]
+        public void TestMultiplication()
+        {
+            result = Calculator.CalculatePair(4, 13, "*");
+            Assert.AreEqual(result, 52);
+        }
+
+        [Test]
+        public void TestDivision()
+        {
+            result = Calculator.CalculatePair(117, 9, "/");
+            Assert.AreEqual(result, 13);
+        }
+
+        [Test]
+        public void TestPowerOperation()
+        {
+            result = Mathf.Pow(5, 2);
+            Assert.AreEqual(result, 25);
+        }
+
+        [Test]
+        public void TestSquareRoot()
+        {
+            result = Mathf.Sqrt(289);
+            Assert.AreEqual(result, 17);
         }
     }
 }
